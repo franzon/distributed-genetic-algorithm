@@ -1,0 +1,15 @@
+version: "3.7"
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  redis:
+      image: 'redis:latest'
+      environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+      networks:
+        - app-tier
+      ports:
+        - 6379:6379

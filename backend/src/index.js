@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const redis = require('redis')
 const knexConfig = require('../knexfile').development
 
 const knex = require('knex')(knexConfig);
@@ -8,9 +9,21 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+
+const subscriber = redis.createClient()
+
+subscriber.on("message", (channel, message) => {
+    try {
+
+    } catch (error) {
+
+    }
+})
+
 app.post('/task', async (req, res) => {
     try {
-        await knex('tasks').insert({ user_name: req.body.user_name, task_description: req.body.task_description })
+        const id = await knex('tasks').insert({ user_name: req.body.user_name, task_description: req.body.task_description })
+        subscriber.subscribe("task_" + id.toString())
         res.json({ status: "created" })
     } catch (error) {
         res.json({ status: error })
@@ -35,6 +48,7 @@ app.get('/task/:id/best', async (req, res) => {
         res.json({ status: error.toString() })
     }
 })
+
 
 
 app.listen(3333, () => {
