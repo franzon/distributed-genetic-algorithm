@@ -15,7 +15,8 @@ subscriber.on("message", async (channel, message) => {
         const data = JSON.parse(message)
         const taskId = Number.parseInt(channel.split("_")[1])
         if (data.status === "completed") {
-
+            knex('tasks').where({ task_id: taskId }).update({ status: 'completed' })
+            subscriber.unsubscribe(channel)
         } else {
             const solutions = await knex('solutions').select('id', 'user_name', 'genome', 'fitness').where({ task_id: taskId }).orderBy('fitness', 'desc').limit(20)
             const worstBestSolution = solutions.pop()
