@@ -4,12 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "migrate": "knex migrate:up",
+    "seed": "knex seed:run"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "knex": "^0.20.1",
+    "kue": "^0.11.6",
+    "pg": "^7.12.1",
     "redis": "^2.8.0",
     "sqlite3": "^4.1.0"
   },

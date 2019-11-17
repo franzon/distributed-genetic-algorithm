@@ -1,12 +1,14 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('tasks', table => {
+    return knex.schema.createTable('algorithms', table => {
+        table.increments('id')
+        table.string('description')
+    }).createTable('tasks', table => {
         table.increments('id')
         table.string('user_name')
-        table.string('task_description')
         table.enu('status', ['pending', 'completed']).defaultTo('pending')
+        table.integer('algorithm_id').references('id').inTable('algorithms')
         table.timestamps()
-
     }).createTable('solutions', table => {
         table.increments('id')
         table.string('user_name')
@@ -18,6 +20,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('solutions').dropTable('tasks')
-
+    return knex.schema.dropTable('solutions').dropTable('tasks').dropTable('algorithms')
 };
