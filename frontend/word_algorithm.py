@@ -32,29 +32,3 @@ class WordAlgorithm(genetic_algorithm.GeneticAlgorithm):
                 a.genome = a.genome[:i] + x + a.genome[i + 1:]
 
         return a
-
-
-# correct = "oratotoeuaroupadoreideroma"
-
-
-# def inject_callback():
-#     return None
-
-
-# def check_solution(x):
-#     if x.genome == correct:
-#         print("Solução: ", x.genome)
-#         return True
-#     return False
-
-
-# alg = WordAlgorithm(
-#     100, 0.1, 0.85, 5, 1000, inject_individual_callback=inject_callback, check_solution_callback=check_solution, extra={"word_len": len(correct), "correct_word": correct})
-
-
-# def callback(x):
-#     print('best', x.genome, x.fitness)
-
-
-# alg.run(callback)
-# print(alg.best.genome, alg.best.fitness, len(correct))

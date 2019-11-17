@@ -32,14 +32,20 @@ is_solving = False
 
 def genetic_thread(task_id, alg):
 
+    def check_solution_callback(a):
+        if a.genome == alg.extra['correct_word']:
+            r.publish('task_' + str(task_id), json.dumps(
+                {"status": "completed"}))
+            return True
+
+        return False
+
     def best_solution_callback(a):
         global best_solutions
-        print("Nova solução encontrada por mim! Fitness: {}".format(
+        print("Nova solução encontrada! Fitness: {}".format(
             a.fitness))
+
         if len(best_solutions) == 0 or a.fitness > best_solutions[-1]["fitness"]:
-            # best_solutions.append(
-            #     {"genome": a.genome, "fitness": a.fitness})
-            # best_solutions = best_solutions[:20]
 
             # Publicar
             r.publish('task_' + str(task_id), json.dumps(
@@ -99,7 +105,7 @@ while cmd != 'exit':
 
             alg = None
 
-            population = int(input('Tamanho opulação: '))
+            population = int(input('Tamanho população: '))
             mutation = float(input('Taxa mutação: '))
             cross = float(input('Taxa cruzamento: '))
 
@@ -108,7 +114,7 @@ while cmd != 'exit':
 
             elif alg_id == 2:
 
-                correct = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                correct = "salve o corinthians o campeão dos campeõeseternamente dentro dos nossos coraçõessalve o corinthians de tradições e glórias miltu és orgulhodos desportistas do brasilteu passado é uma bandeirateu presente é uma liçãofiguras entre os primeirosdo nosso esporte bretãocorinthians grandesempre altaneiroés do brasilo clube mais brasileirosalve o corinthianso campeão dos campeõeseternamente dentro dos nossos coraçõessalve o corinthians de tradições e glórias miltu és orgulhodos desportistas do brasil"
                 alg = word_algorithm.WordAlgorithm(
                     population, mutation, cross, 5, input_queue=input_queue, extra={"word_len": len(correct), "correct_word": correct})
 
@@ -123,6 +129,7 @@ while cmd != 'exit':
                         data = json.loads(data["data"].decode('utf-8'))
                         # Alguem completou
                         if data["status"] == "completed":
+                            print("Alguem encontrou a solução! Parando execução.")
                             input_queue.put({"action": "stop_finished"})
                             break
 
@@ -139,7 +146,7 @@ while cmd != 'exit':
                                 best_solutions = best_solutions[:20]
 
                                 # 10% de chance de incluir na população
-                                if random.random() < 0.1:
+                                if data["user_name"] != name and random.random() < 0.1:
                                     input_queue.put(
                                         {"action": "insert", "genome": data["genome"]})
 
