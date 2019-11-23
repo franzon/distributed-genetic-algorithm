@@ -1,3 +1,9 @@
+/*
+Descrição: Backend prinicpal
+Autor: Jorge Rossi
+Data: 23/11/2019
+*/
+
 const express = require('express')
 const cors = require('cors')
 const redis = require('redis')

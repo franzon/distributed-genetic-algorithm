@@ -1,3 +1,9 @@
+'''
+Descrição: Arquivo principal cliente
+Autor: Jorge Rossi
+Data: 23/11/2019
+'''
+
 import requests
 import redis
 import time

@@ -1,6 +1,10 @@
+'''
+Descrição: Implementação de um algoritmo genético simples
+Autor: Jorge Rossi
+Data: 23/11/2019
+'''
+
 import genetic_algorithm
-
-
 import string
 import random
 

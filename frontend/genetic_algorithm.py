@@ -1,3 +1,9 @@
+'''
+Descrição: Classe genética para um algoritmo genético
+Autor: Jorge Rossi
+Data: 23/11/2019
+'''
+
 import abc
 import random
 import copy
