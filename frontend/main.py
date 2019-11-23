@@ -19,7 +19,7 @@ name = input('Digite um nome: ')
 
 print("\nComandos: ")
 print(" list        -> listar tarefas")
-print(" add [name]  -> criar tarefa [tsp|word]")
+print(" add [name]  -> criar tarefa [word]")
 print(" join [id]   -> participar de uma tarefa")
 print(" exit        -> sair da aplicação\n\n")
 
@@ -114,7 +114,7 @@ while cmd != 'exit':
 
             elif alg_id == 2:
 
-                correct = "salve o corinthians o campeão dos campeõeseternamente dentro dos nossos coraçõessalve o corinthians de tradições e glórias miltu és orgulhodos desportistas do brasilteu passado é uma bandeirateu presente é uma liçãofiguras entre os primeirosdo nosso esporte bretãocorinthians grandesempre altaneiroés do brasilo clube mais brasileirosalve o corinthianso campeão dos campeõeseternamente dentro dos nossos coraçõessalve o corinthians de tradições e glórias miltu és orgulhodos desportistas do brasil"
+                correct = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                 alg = word_algorithm.WordAlgorithm(
                     population, mutation, cross, 5, input_queue=input_queue, extra={"word_len": len(correct), "correct_word": correct})
 
